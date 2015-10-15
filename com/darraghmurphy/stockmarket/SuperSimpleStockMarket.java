@@ -9,8 +9,6 @@ import com.darraghmurphy.stockmarket.impl.Trade;
 
 import java.util.Calendar;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
@@ -100,15 +98,13 @@ public class SuperSimpleStockMarket implements StockMarketInterface {
     /**
      * Record a trade.
      */
-    private void recordTrade(TradeInterface trade) {
+    private synchronized void recordTrade(TradeInterface trade) {
 
         /** Store a list of stocks by symbol */
-        synchronized (tradeSet) {
-            if (!stocks.keySet().contains(trade.getStock().getSymbol())) {
-                stocks.put(trade.getStock().getSymbol(), trade.getStock());
-            }
-            tradeSet.add(trade);
+        if (!stocks.keySet().contains(trade.getStock().getSymbol())) {
+            stocks.put(trade.getStock().getSymbol(), trade.getStock());
         }
+        tradeSet.add(trade);
     }
 
     /**
