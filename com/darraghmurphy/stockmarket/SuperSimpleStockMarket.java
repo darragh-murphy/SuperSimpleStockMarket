@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
@@ -44,7 +45,7 @@ public class SuperSimpleStockMarket implements StockMarketInterface {
      * time, which will improve access time when wish to get trades by timestamp.
      * <p/>
      */
-    private final Map<String, StockInterface> stocks = new HashMap<>();
+    private final ConcurrentHashMap<String, StockInterface> stocks = new ConcurrentHashMap<>();
 
 
     /**
