@@ -2,6 +2,8 @@ package com.darraghmurphy.stockmarket.impl;
 
 import com.darraghmurphy.stockmarket.api.StockInterface;
 
+import java.math.BigDecimal;
+
 /**
  * Common Stock.
  */
@@ -13,7 +15,7 @@ public class CommonStock extends AbstractStock implements StockInterface {
      * <p/>
      * This is a percentage of the common dividend
      */
-    private final Double lastDividend;
+    private final BigDecimal lastDividend;
 
     /**
      * Constructor.
@@ -24,8 +26,8 @@ public class CommonStock extends AbstractStock implements StockInterface {
      */
     public CommonStock(String symbol, Double lastDividend, Double parValue) {
         this.symbol = symbol;
-        this.lastDividend = lastDividend;
-        this.parValue = parValue;
+        this.lastDividend = BigDecimal.valueOf(lastDividend);
+        this.parValue = BigDecimal.valueOf(parValue);
     }
 
     /**
@@ -33,7 +35,7 @@ public class CommonStock extends AbstractStock implements StockInterface {
      */
     public double priceEarningsRatio(double price) {
 
-        return price / lastDividend;
+        return new BigDecimal(price).divide(lastDividend).doubleValue();
     }
 
     /**
@@ -44,9 +46,9 @@ public class CommonStock extends AbstractStock implements StockInterface {
         if (price <= 0) throw new IllegalArgumentException(String.format("Invalid parameter %f", price));
 
         /** TODO Requirements are unclear. Discussion required. */
-        if (lastDividend == 0d) return 0d;
+        if (lastDividend.signum() != 1) return 0d;
 
-        return lastDividend / price;
+        return lastDividend.divide(BigDecimal.valueOf(price)).doubleValue();
 
     }
 }

@@ -2,6 +2,8 @@ package com.darraghmurphy.stockmarket.impl;
 
 import com.darraghmurphy.stockmarket.api.StockInterface;
 
+import java.math.BigDecimal;
+
 /**
  * Abstract Stock.
  */
@@ -16,7 +18,7 @@ public abstract class AbstractStock implements StockInterface {
     /**
      * Par value for a share refers to the stock value stated in the corporate charter. *./
      */
-    Double parValue;
+    BigDecimal parValue;
 
     /**
      *
@@ -28,7 +30,7 @@ public abstract class AbstractStock implements StockInterface {
     /**
      *
      */
-    public Double getParValue() {
-        return parValue;
+    public double getParValue() {
+        return parValue.doubleValue();
     }
 }

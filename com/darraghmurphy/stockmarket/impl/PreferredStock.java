@@ -2,6 +2,8 @@ package com.darraghmurphy.stockmarket.impl;
 
 import com.darraghmurphy.stockmarket.api.StockInterface;
 
+import java.math.BigDecimal;
+
 /**
  * Preferred Stock.
  */
@@ -12,7 +14,7 @@ public class PreferredStock extends AbstractStock implements StockInterface {
      * a 5% dividend would pay $.3125 quarterly (.05 x $25/4=. 3125). This is why preferred shares
      * are usually thought of as “fixed income” investments.
      */
-    private final Double fixedDividend;
+    private final BigDecimal fixedDividend;
 
     /**
      * Constructor.
@@ -23,15 +25,15 @@ public class PreferredStock extends AbstractStock implements StockInterface {
      */
     public PreferredStock(String symbol, Double parValue, Double fixedDividend) {
         this.symbol = symbol;
-        this.parValue = parValue;
-        this.fixedDividend = fixedDividend;
+        this.parValue = BigDecimal.valueOf(parValue);
+        this.fixedDividend = BigDecimal.valueOf(fixedDividend);
     }
 
     /**
      *
      */
     public double dividendYield(double price) {
-        return fixedDividend * getParValue() / price;
+        return fixedDividend.multiply(parValue).divide(BigDecimal.valueOf(price)).doubleValue();
 
     }
 
@@ -40,7 +42,7 @@ public class PreferredStock extends AbstractStock implements StockInterface {
      */
     public double priceEarningsRatio(double price) {
 
-        return price / fixedDividend;
+        return BigDecimal.valueOf(price).divide(fixedDividend).doubleValue();
     }
 
 

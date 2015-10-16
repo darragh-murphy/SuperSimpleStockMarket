@@ -262,6 +262,8 @@ public class TestSuperSimpleStockMarket {
         testVolumeWeightedStockPrice();
         testStock();
         testConcurrentSkipListSet();
+
+        System.out.println("All tests have completed successfully");
     }
 
 }

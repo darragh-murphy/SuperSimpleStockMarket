@@ -12,7 +12,7 @@ public interface StockInterface {
      *
      * @return par value
      */
-    Double getParValue();
+    double getParValue();
 
     /**
      * Dividend Yield.

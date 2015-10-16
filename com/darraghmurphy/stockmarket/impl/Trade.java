@@ -3,6 +3,7 @@ package com.darraghmurphy.stockmarket.impl;
 import com.darraghmurphy.stockmarket.api.StockInterface;
 import com.darraghmurphy.stockmarket.api.TradeInterface;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
@@ -16,7 +17,7 @@ public class Trade implements TradeInterface {
      * A share price is the price of a single share of a number of saleable stocks of a company, derivative or other
      * financial asset.
      */
-    private final Double price;
+    private final BigDecimal price;
 
     /**
      * Calendar is used to store the timestamp as it is better for date arithmetic and also handles localization.
@@ -53,7 +54,7 @@ public class Trade implements TradeInterface {
         this.tradeStatus = tradeStatus;
         this.numberOfShares = numberOfShares;
         this.stock = stock;
-        this.price = price;
+        this.price = BigDecimal.valueOf(price);
     }
 
 
@@ -61,7 +62,7 @@ public class Trade implements TradeInterface {
      *
      */
     public Double getPrice() {
-        return price;
+        return price.doubleValue();
     }
 
     /**
@@ -85,10 +86,4 @@ public class Trade implements TradeInterface {
         return numberOfShares;
     }
 
-    /**
-     *
-     */
-    public TradeStatus getTradeStatus() {
-        return tradeStatus;
-    }
 }
